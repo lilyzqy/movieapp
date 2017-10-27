@@ -9,6 +9,20 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div>
+        <% if current_user.nil? %>
+          <% link_to 'Sign_in', new_session_url %>
+          <% link_to 'Sign_up', new_user_url %>
+        <% else %>
+           <%= button_to 'Logout', session_url, method: :delete %>
+        <% end %>
+      </div>
+      <h1>Music App</h1>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
+
   </body>
 </html>
