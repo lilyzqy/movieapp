@@ -5,7 +5,7 @@ class BandsController < ApplicationController
   end
 
   def create
-    @band = Band.new(name:params[:name])
+    @band = Band.new(name: params[:name])
     if @band.save
       redirect_to :show
     else
@@ -26,6 +26,10 @@ class BandsController < ApplicationController
     @band = Band.find(id:params[:id])
     if @band.update(name: params[:name])
       redirect_to :show
+    else
+      flash.now[:errors] = @band.errors.full_messages
+      render :edit
+    end
   end
 
   def show
